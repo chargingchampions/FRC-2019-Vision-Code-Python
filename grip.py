@@ -52,8 +52,8 @@ class GripRetroreflectivePipeline:
         self.__filter_contours_solidity = [84.023, 100]
         self.__filter_contours_max_vertices = 1000000
         self.__filter_contours_min_vertices = 0
-        self.__filter_contours_min_ratio = 0.45
-        self.__filter_contours_max_ratio = 0.65
+        self.__filter_contours_min_ratio = 0.4
+        self.__filter_contours_max_ratio = 0.7
 
         self.filter_contours_output = None
 
@@ -185,8 +185,8 @@ class GripRetroreflectivePipeline:
             #if (solid < solidity[0] or solid > solidity[1]):
             #    continue
             
-            rect = cv2.minAreaRect(contour)
-            solidRect = 100 * area / cv2.contourArea(rect)
+            rectCenter, (rectWidth, rectHeight), rectAngle = cv2.minAreaRect(contour)
+            solidRect = 100 * area / (rectWidth*rectHeight)
             if (solidRect < solidity[0] or solidRect > solidity[1]):
                 continue
             if (len(contour) < min_vertex_count or len(contour) > max_vertex_count):
