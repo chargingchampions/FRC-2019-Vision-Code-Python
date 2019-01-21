@@ -44,7 +44,8 @@ def extra_processing(pipeline, frame, width, height):
         #print('boxPoints = ', boxPoints)
         #print('point, dimensions = ', point, dimensions)
         #print('angle: ', angle)
-        #keeping only the right-slanted lines
+        
+        #keeping only the right-slanted rectangles
         if (angle > -85 and angle < -65):
             boxPoints = np.int0(boxPoints)
             x, y = np.sum(boxPoints, axis = 0)/4

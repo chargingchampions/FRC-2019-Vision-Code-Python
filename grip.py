@@ -177,9 +177,17 @@ class GripRetroreflectivePipeline:
                 continue
             if (cv2.arcLength(contour, True) < min_perimeter):
                 continue
-            hull = cv2.convexHull(contour)
-            solid = 100 * area / cv2.contourArea(hull)
-            if (solid < solidity[0] or solid > solidity[1]):
+            #replaced the commented out section below
+            #with area bounded by minAreaRect
+            
+            #hull = cv2.convexHull(contour)
+            #solid = 100 * area / cv2.contourArea(hull)
+            #if (solid < solidity[0] or solid > solidity[1]):
+            #    continue
+            
+            rect = cv2.minAreaRect(contour)
+            solidRect = 100 * area / cv2.contourArea(rect)
+            if (solidRect < solidity[0] or solidRect > solidity[1]):
                 continue
             if (len(contour) < min_vertex_count or len(contour) > max_vertex_count):
                 continue
